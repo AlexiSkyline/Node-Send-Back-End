@@ -1,0 +1,18 @@
+{
+  "name": "node-send-back-end",
+  "version": "1.0.0",
+  "description": "Proyecto NodeSend",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./index.js",
+    "start": "node ./index.js"
+  },
+  "author": "Alexis Evaristo López Gómez",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
