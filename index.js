@@ -17,6 +17,7 @@ app.use( express.json() );
 
 // *Rutas de la APP
 app.use( '/api/usuarios', require( './routes/usuarios' ) );
+app.use( '/api/auth', require( './routes/auth' ) );
 
 // Todo: Arranca la app
 app.listen( port, () => {
