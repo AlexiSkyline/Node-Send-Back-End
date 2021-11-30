@@ -15,7 +15,8 @@ const enlacesSchema = new Schema({
         required: true
     },
     descargas: {
-        type: Number
+        type: Number,
+        default: 1
     },
     autor: {
         type: mongoose.Schema.Types.ObjectId,
@@ -23,7 +24,8 @@ const enlacesSchema = new Schema({
         default: null
     },
     password: {
-        type: String
+        type: String,
+        default: null
     }, 
     creado: {
         type: Date,
@@ -31,4 +33,4 @@ const enlacesSchema = new Schema({
     }
 });
 
-modules.exports = mongoose.model( 'Enlaces', enlacesSchema );
+module.exports = mongoose.model( 'Enlaces', enlacesSchema );

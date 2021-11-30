@@ -9,4 +9,4 @@ router.post( '/',
     enlacesController.nuevoEnlace
 );
 
-module.exports = routes;
+module.exports = router;
