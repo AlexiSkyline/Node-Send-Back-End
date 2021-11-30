@@ -37,7 +37,6 @@ exports.autenticarUsuario = async ( req, res, next ) => {
     }
 };
 
-exports.usuarioAutenticado = async ( req, res, next ) => {
-   
-    
+exports.usuarioAutenticado = async ( req, res ) => {
+   res.json({ usuario: req.usuario });
 }
