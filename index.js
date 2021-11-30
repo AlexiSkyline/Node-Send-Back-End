@@ -12,6 +12,9 @@ console.log( 'Comenzando Node Send' );
 // * Puertos de la app
 const port = process.env.PORT || 4000;
 
+// Todo: Habilitar leer los valores de un Body
+app.use( express.json() );
+
 // *Rutas de la APP
 app.use( '/api/usuarios', require( './routes/usuarios' ) );
 
