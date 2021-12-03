@@ -1,11 +1,19 @@
 const express = require( 'express' );
 const conectarDB = require( './config/db' );
+const cors = require( 'cors' );
 
 // Todo: crear el servidor
 const app = express();
 
 // Todo: Conextar a la base de datos
 conectarDB();
+
+// Todo: Habilitando Cors
+const opcionesCors = {
+    origin: process.env.FRONTEND_URL
+}
+
+app.use( cors( opcionesCors ) );
 
 console.log( 'Comenzando Node Send' );
 
