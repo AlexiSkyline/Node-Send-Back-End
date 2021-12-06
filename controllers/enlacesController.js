@@ -47,6 +47,24 @@ exports.todosEnlaces = async ( req, res ) => {
     }
 }
 
+// Todo: Verifica si el archivo tiene password
+exports.tienePassword = async ( req, res ) => {
+    const { url } = req.params;
+    
+    const enlace = await Enlaces.findOne({ url });
+
+    if( !enlace ) {
+        res.status( 404 ).json({ msg: 'Ese enlace no existe' });
+        return next();
+    }
+
+    if( enlace.password ) {
+        return res.json({ password: true, enlace: enlace.url });
+    }
+
+    next();
+}
+
 // Todo: Obtener el enlace
 exports.obtenerEnlace = async ( req, res, next ) => {
     const { url } = req.params;
