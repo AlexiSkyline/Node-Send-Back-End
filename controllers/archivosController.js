@@ -36,5 +36,10 @@ exports.eliminarArchivo = async ( req, res ) => {
     } catch (error) {
         console.log(error);
     }
+}
 
+// Todo: Descarga un archivo
+exports.descargar = ( req, res ) => {
+    const archivo = __dirname + '/../uploads/' + req.params.archivo;
+    res.download( archivo );
 }

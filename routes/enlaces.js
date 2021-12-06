@@ -14,7 +14,7 @@ router.post( '/',
     enlacesController.nuevoEnlace
 );
 
-router.post( '/', 
+router.get( '/', 
     enlacesController.todosEnlaces
 );
 
