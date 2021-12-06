@@ -65,6 +65,22 @@ exports.tienePassword = async ( req, res ) => {
     next();
 }
 
+// Todo: Verifica si el password del enlace es correcto
+exports.verificarPassword = async ( req, res, next ) => {
+    const { url } = req.params;
+    const { password } = req.body;
+
+    // Todo: Buscar el enlace
+    const enlace = await Enlaces.findOne({ url });
+
+    // Todo: Verificar el password
+    if( bcrypt.compareSync( password, enlace.password ) ) {
+        next();
+    } else {
+        return res.status( 401 ).json({ msg: 'Password Incorrecto' });
+    }
+}
+
 // Todo: Obtener el enlace
 exports.obtenerEnlace = async ( req, res, next ) => {
     const { url } = req.params;
@@ -77,7 +93,7 @@ exports.obtenerEnlace = async ( req, res, next ) => {
     }
 
     // * Si el enlace exite
-    res.json({ archivo: enlace.nombre }); 
+    res.json({ archivo: enlace.nombre, password: false }); 
 
     next();
 }

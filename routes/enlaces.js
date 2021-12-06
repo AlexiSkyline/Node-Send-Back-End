@@ -22,4 +22,9 @@ router.get( '/:url',
     enlacesController.obtenerEnlace
 );
 
+router.post( '/:url', 
+    enlacesController.verificarPassword,
+    enlacesController.obtenerEnlace
+);
+
 module.exports = router;
