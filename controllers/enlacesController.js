@@ -60,14 +60,6 @@ exports.obtenerEnlace = async ( req, res, next ) => {
 
     // * Si el enlace exite
     res.json({ archivo: enlace.nombre }); 
-    
-    if( enlace.descargas === 1 ) {
-        req.archivo = enlace.archivo;
-        await Enlaces.findOneAndRemove({ url });
 
-        next();
-    } else {
-        enlace.descargas--;
-        await enlace.save();
-    }
+    next();
 }

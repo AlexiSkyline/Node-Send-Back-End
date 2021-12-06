@@ -1,6 +1,7 @@
 const multer = require( 'multer' );
 const shortid = require( 'shortid' );
 const fs = require( 'fs' );
+const Enlaces = require( '../models/Enlace' );
 
 exports.subirArchivo = async ( req, res, next ) => {
     const configuracionMulter = {
@@ -39,7 +40,26 @@ exports.eliminarArchivo = async ( req, res ) => {
 }
 
 // Todo: Descarga un archivo
-exports.descargar = ( req, res ) => {
-    const archivo = __dirname + '/../uploads/' + req.params.archivo;
-    res.download( archivo );
+exports.descargar = async ( req, res, next ) => {
+    // Todo: Obtenemos el enlace
+    const { archivo } =  req.params;
+    const enlace = await Enlaces.findOne({ nombre: archivo });
+
+    const archivoDescarga= __dirname + '/../uploads/' + archivo;
+    res.download( archivoDescarga );
+
+    // Todo: Elimina el archivo y de la BD
+    const { descargas, nombre } = enlace;
+
+    if( descargas === 1 ) {
+        // * Elimina el archivo
+        req.archivo = nombre;
+
+        // * Elimina el registro de la BD
+        await Enlaces.findOneAndRemove( enlace.id );
+        next();
+    } else {
+        enlace.descargas--;
+        await enlace.save();
+    }
 }
