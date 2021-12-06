@@ -11,10 +11,10 @@ exports.nuevoEnlace = async ( req, res, next ) => {
     }
 
     //Todo: Crea un nuevo Objeto de Enlace
-    const { nombre_original } = req.body;
+    const { nombre_original, nombre } = req.body;
     const enlace = new Enlaces();
     enlace.url = shortid.generate();
-    enlace.nombre = shortid.generate();
+    enlace.nombre = nombre;
     enlace.nombre_original = nombre_original;
 
     if( req.usuario ) {
@@ -34,6 +34,16 @@ exports.nuevoEnlace = async ( req, res, next ) => {
         return res.json({ msg: `${ enlace.url }`});
     } catch (error) {
         console.log(error);
+    }
+}
+
+// Todo: Listado de  todos los enlaces
+exports.todosEnlaces = async ( req, res ) => {
+    try {
+        const enlaces = await Enlaces.find({}).select( 'url -_id' );
+        res.json({ enlaces });
+    } catch (error) {
+        console.log( error );
     }
 }
 
